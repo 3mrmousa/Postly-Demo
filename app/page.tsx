@@ -4,10 +4,7 @@ import { getMe } from "@/lib/auth/getMe";
 import { getPosts } from "@/lib/services/post.service";
 
 export default async function Home() {
-  const [posts, user] = await Promise.all([getPosts(), getMe()]);
-
-  console.log(user);
-  
+  const [posts, user] = await Promise.all([getPosts(), getMe()]);  
 
   return (
     <main className="min-h-screen bg-neutral-950 flex flex-col items-center px-4 py-10 gap-6">

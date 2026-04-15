@@ -6,9 +6,10 @@ import { redirect } from "next/navigation";
 
 async function Profile() {
   const user = await getMe();
-  const posts = await getUserPosts(user._id.toString());
 
   if (!user) redirect("/login");
+
+  const posts = await getUserPosts(user._id.toString());
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
@@ -65,6 +66,7 @@ async function Profile() {
                 post={post}
                 currentUserId={user._id.toString()}
                 key={post.id}
+                isAuth={!!user}
               />
             ))
           ) : (
