@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { connectDB } from "../mongodb";
 import Post from "@/models/post.model";
-import { Comment } from "@/types/types";
 
 export async function toggleLike(postId: string, userId: string) {
   await connectDB();
@@ -87,7 +86,8 @@ export async function getPosts() {
       id.toString(),
     ),
     likesCount: post.likes?.length || 0,
-    comments: (post.comments || []).map((comment) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    comments: (post.comments || []).map((comment: any) => ({
       id: comment._id.toString(),
       content: comment.content,
       createdAt: comment.createdAt?.toString() ?? "",
@@ -119,7 +119,8 @@ export async function getUserPosts(userId: string) {
       id.toString(),
     ),
     likesCount: post.likes?.length || 0,
-    comments: (post.comments || []).map((comment) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    comments: (post.comments || []).map((comment: any) => ({
       id: comment._id.toString(),
       content: comment.content,
       createdAt: comment.createdAt?.toString() ?? "",
