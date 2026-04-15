@@ -7,7 +7,7 @@ async function Nav() {
 
   return (
     <nav
-      className="bg-zinc-900 py-4 px-5 
+      className="bg-zinc-900/50 py-4 px-5 
     fixed w-full"
     >
       <div className="w-full flex justify-between">

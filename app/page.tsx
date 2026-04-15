@@ -4,17 +4,30 @@ import { getMe } from "@/lib/auth/getMe";
 import { getPosts } from "@/lib/services/post.service";
 
 export default async function Home() {
-  const [posts, user] = await Promise.all([getPosts(), getMe()]);  
+  const [posts, user] = await Promise.all([getPosts(), getMe()]);
 
   return (
-    <main className="min-h-screen bg-neutral-950 flex flex-col items-center px-4 py-10 gap-6">
+    <main className="min-h-screen flex flex-col items-center px-4 py-10 gap-6">
       <div className="w-full max-w-lg">
-        <h1 className="text-2xl font-black text-white tracking-tight">
-          Postly
-        </h1>
-        <p className="text-neutral-500 text-sm mt-1">
-          Share what&apos;s on your mind.
-        </p>
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <h1 className="text-3xl font-black text-white tracking-tight">
+              Postly
+            </h1>
+            <span
+              className="px-2 py-0.5 rounded-full bg-blue-600/20 border border-blue-500/30
+      text-blue-400 text-xs font-medium"
+            >
+              Beta
+            </span>
+          </div>
+          <p className="text-zinc-500 text-sm">
+            Share what&apos;s on your mind with the world 🌍
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-zinc-800 mt-5" />
       </div>
 
       <div className="w-full max-w-lg">
