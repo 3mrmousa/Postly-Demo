@@ -3,8 +3,8 @@
 import { useFormStatus } from "react-dom";
 
 function SubmitButton({
-  ButtonTitle = "Post",
-  onPending = "Posting",
+  ButtonTitle ,
+  onPending ,
 }: {
   ButtonTitle: string;
   onPending: string;

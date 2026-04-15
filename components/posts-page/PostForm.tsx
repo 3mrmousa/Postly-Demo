@@ -6,6 +6,7 @@ import { useActionState } from "react";
 import { initialFormState } from "@/types/types";
 
 function PostForm() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [state, formAction, isPending] = useActionState(
     createPostAction,
     initialFormState,
@@ -27,7 +28,7 @@ function PostForm() {
           className="bg-transparent text-sm text-white placeholder:text-neutral-600
            outline-none border border-zinc-800 py-2 px-3 rounded-xl"
         />
-        <SubmitButton />
+        <SubmitButton ButtonTitle="Post" onPending="Posting" />
       </div>
 
       {state.message && state.error && (
