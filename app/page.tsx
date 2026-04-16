@@ -22,7 +22,7 @@ export default async function Home() {
             </span>
           </div>
           <p className="text-zinc-500 text-sm">
-            Share what&apos;s on your mind with the world 🌍
+            Share what&apos;s on your mind with the world
           </p>
         </div>
 

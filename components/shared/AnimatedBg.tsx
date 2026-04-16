@@ -28,14 +28,14 @@ function AnimatedBg() {
     <>
       <div
         ref={blob1Ref}
-        className="fixed -top-40 -left-40 w-125 h-125
-        bg-blue-500/30 rounded-full blur-[120px] pointer-events-none z-0
+        className="fixed -top-40 -left-40 w-140 h-140
+        bg-violet-500/30 rounded-full blur-[150px] pointer-events-none z-0
         transition-transform duration-700 ease-out"
       />
       <div
         ref={blob2Ref}
-        className="fixed -bottom-40 -right-40 w-125 h-125
-        bg-indigo-500/30 rounded-full blur-[120px] pointer-events-none z-0
+        className="fixed -bottom-40 -right-40 w-140 h-140
+        bg-violet-500/30 rounded-full blur-[150px] pointer-events-none z-0
         transition-transform duration-700 ease-out"
       />
     </>

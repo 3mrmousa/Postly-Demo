@@ -30,7 +30,18 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-screen bg-zinc-950 text-zinc-100 overflow-x-hidden">
-        <AnimatedBg />
+        <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/loop/loop-earth.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
 
         <div className="relative z-10">
           <Nav />
