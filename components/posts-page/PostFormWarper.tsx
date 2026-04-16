@@ -12,10 +12,10 @@ async function PostFormWrapper() {
       ) : (
         <div
           className="flex flex-col items-center gap-4 py-6 px-4 
-        bg-zinc-900 border border-zinc-800 rounded-2xl text-center"
+        bg-zinc-900/50 border-2 border-purple-800/30 hover:border-purple-700/50 rounded-2xl text-center"
         >
           <div
-            className="w-12 h-12 rounded-2xl bg-zinc-800 border border-zinc-700
+            className="w-12 h-12 rounded-2xl bg-zinc-800 border border-purple-700
           flex items-center justify-center"
           >
             <svg

@@ -14,7 +14,8 @@ function PostForm() {
 
   return (
     <form action={formAction} className="flex flex-col gap-2">
-      <div className="flex flex-col gap-5 bg-neutral-900 border border-neutral-800 rounded-2xl px-4 py-3 focus-within:border-violet-500 transition duration-200">
+      <div className="flex flex-col gap-5 bg-neutral-900/50 border-2 border-purple-800/30 hover:border-purple-700/50
+       rounded-2xl px-4 py-3 focus-within:border-violet-500 transition duration-200">
         <input
           type="text"
           name="title"

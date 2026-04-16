@@ -9,6 +9,8 @@ interface IUser extends Document {
   password: string;
   avatar?: string;
   cover?: string;
+  followers?: mongoose.Types.ObjectId[];
+  following?: mongoose.Types.ObjectId[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -28,6 +30,18 @@ const UserSchema = new Schema<IUser>(
     password: { type: String, required: true },
     avatar: String,
     cover: String,
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   { timestamps: true },
 );

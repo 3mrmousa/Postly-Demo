@@ -1,15 +1,32 @@
+import FollowButton from "@/components/posts-page/FollowButton";
 import PostItem from "@/components/posts-page/PostItem";
 import { getMe } from "@/lib/auth/getMe";
 import { getUserPosts } from "@/lib/services/post.service";
+import { getUserByUsername } from "@/lib/services/user.service";
 import { Post } from "@/types/types";
 import { redirect } from "next/navigation";
 
-async function Profile() {
-  const user = await getMe();
+async function UserProfile({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
+  const { username } = await params;
 
-  if (!user) redirect("/login");
+  const [user, currentUser] = await Promise.all([
+    getUserByUsername(username),
+    getMe(), 
+  ]);
 
-  const posts = await getUserPosts(user._id.toString());
+  if (!user) redirect("/feed");
+
+  const posts = await getUserPosts(user.id);
+
+  const isFollowing = (user.followers || []).includes(
+    currentUser?._id?.toString() ?? "",
+  );
+
+  const isOwnProfile = currentUser?._id?.toString() === user.id;
 
   return (
     <div className="min-h-screen text-zinc-100 pb-20">
@@ -33,12 +50,16 @@ async function Profile() {
             {user.username?.charAt(0).toUpperCase()}
           </div>
 
-          <button
-            className="px-4 py-2 rounded-xl border border-purple-500/30 text-purple-400
-          hover:bg-purple-500/10 hover:border-purple-400 text-sm font-medium transition duration-200"
-          >
-            Edit Profile
-          </button>
+          {isOwnProfile ? (
+            <button
+              className="px-4 py-2 rounded-xl border border-purple-500/30 text-purple-400
+            hover:bg-purple-500/10 hover:border-purple-400 text-sm font-medium transition duration-200"
+            >
+              Edit Profile
+            </button>
+          ) : (
+            <FollowButton targetUserId={user.id} isFollowing={isFollowing} />
+          )}
         </div>
 
         <div className="space-y-1 mb-4">
@@ -50,25 +71,20 @@ async function Profile() {
         </div>
 
         <div className="grid grid-cols-3 gap-3 mb-6">
-          <div
-            className="bg-purple-500/5 border border-purple-500/20
-          rounded-2xl p-4 text-center"
-          >
+          <div className="bg-purple-500/5 border border-purple-500/20 rounded-2xl p-4 text-center">
             <p className="text-xl font-bold text-white">{posts?.length || 0}</p>
             <p className="text-zinc-500 text-xs mt-1">Posts</p>
           </div>
-          <div
-            className="bg-purple-500/5 border border-purple-500/20
-          rounded-2xl p-4 text-center"
-          >
-            <p className="text-xl font-bold text-white">0</p>
+          <div className="bg-purple-500/5 border border-purple-500/20 rounded-2xl p-4 text-center">
+            <p className="text-xl font-bold text-white">
+              {user.followersCount}
+            </p>
             <p className="text-zinc-500 text-xs mt-1">Followers</p>
           </div>
-          <div
-            className="bg-purple-500/5 border border-purple-500/20
-          rounded-2xl p-4 text-center"
-          >
-            <p className="text-xl font-bold text-white">0</p>
+          <div className="bg-purple-500/5 border border-purple-500/20 rounded-2xl p-4 text-center">
+            <p className="text-xl font-bold text-white">
+              {user.followingCount}
+            </p>
             <p className="text-zinc-500 text-xs mt-1">Following</p>
           </div>
         </div>
@@ -85,9 +101,9 @@ async function Profile() {
               {posts.map((post: Post) => (
                 <PostItem
                   post={post}
-                  currentUserId={user._id.toString()}
+                  currentUserId={currentUser?._id?.toString() ?? ""}
                   key={post.id}
-                  isAuth={!!user}
+                  isAuth={!!currentUser}
                 />
               ))}
             </div>
@@ -120,4 +136,4 @@ async function Profile() {
   );
 }
 
-export default Profile;
+export default UserProfile;

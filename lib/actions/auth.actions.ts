@@ -4,11 +4,14 @@ import {
   loginByEmail,
   loginByUsername,
   register,
+  toggleFollow,
 } from "@/lib/services/user.service";
 import { z } from "zod";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { getMe } from "../auth/getMe";
 
 type FormState = {
   error: string | null;
@@ -179,4 +182,25 @@ export async function RegisterAction(prevState: FormState, formData: FormData) {
 export async function logoutAction() {
   (await cookies()).delete("token");
   redirect("/login");
+}
+
+export async function toggleFollowAction(
+  targetUserId: string,
+) {
+  const user = await getMe();
+  if (!user)
+    return {
+      success: false,
+      message: "Unauthorized",
+      error: "Unauthorized",
+      data: undefined,
+    };
+  await toggleFollow(user._id, targetUserId);
+  revalidatePath("/profile");
+  return {
+    success: true,
+    message: "Success",
+    error: null,
+    data: undefined,
+  };
 }
