@@ -12,11 +12,11 @@ export default async function Feed() {
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <h1 className="text-3xl font-black text-white tracking-tight">
-              PostNode
+              Post<span className="text-purple-500">Node</span>{" "}
             </h1>
             <span
-              className="px-2 py-0.5 rounded-full bg-blue-600/20 border border-blue-500/30
-      text-blue-400 text-xs font-medium"
+              className="px-2 py-0.5 rounded-full bg-purple-600/20 border border-purple-500/30
+      text-purple-400 text-xs font-medium"
             >
               Beta
             </span>
