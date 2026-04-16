@@ -7,15 +7,15 @@ async function Nav() {
 
   return (
     <nav
-      className="bg-zinc-900/20 py-4 px-5 
+      className="bg-zinc-900/10 py-4 px-5 
     fixed w-full"
     >
       <div className="w-full flex justify-between">
         <Link
           href="/"
-          className="text-white font-bold text-lg tracking-tight hover:text-blue-400 transition duration-200"
+          className="text-white font-bold text-2xl tracking-tight hover:text-blue-400 hover:translate-2.5 hover:rotate-10 hover:scale-115 transition duration-500"
         >
-          Postly
+          Post<span className="text-purple-500">Node</span>
         </Link>
 
         {user ? (
@@ -24,7 +24,7 @@ async function Nav() {
               href="/profile"
               className="flex items-center gap-1 text-sm text-zinc-400 hover:text-white transition duration-200"
             >
-              <div className="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs font-bold">
+              <div className="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xs font-bold">
                 {user.username?.charAt(0).toUpperCase()}
               </div>
               <span className="hidden sm:block">{user.username}</span>
@@ -56,7 +56,7 @@ async function Nav() {
             <li>
               <Link
                 href="/register"
-                className="text-sm px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500
+                className="text-sm px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500
                 text-white font-medium transition duration-200 active:scale-95"
               >
                 Register

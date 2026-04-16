@@ -45,7 +45,7 @@ export default function RootLayout({
 
         <div className="relative z-10">
           <Nav />
-          <main className="pt-20">{children}</main>
+          <main>{children}</main>
         </div>
       </body>
     </html>

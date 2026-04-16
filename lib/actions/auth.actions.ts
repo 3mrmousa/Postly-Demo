@@ -84,7 +84,7 @@ export async function LoginByEmailAction(
       success: false,
     };
   }
-  redirect("/");
+  redirect("/feed");
 }
 
 export async function LoginByUsernameAction(
@@ -130,7 +130,7 @@ export async function LoginByUsernameAction(
       success: false,
     };
   }
-  redirect("/");
+  redirect("/feed");
 }
 
 export async function RegisterAction(prevState: FormState, formData: FormData) {
@@ -173,7 +173,7 @@ export async function RegisterAction(prevState: FormState, formData: FormData) {
       success: false,
     };
   }
-  redirect("/");
+  redirect("/feed");
 }
 
 export async function logoutAction() {

@@ -1,57 +1,66 @@
-import PostFormWarper from "@/components/posts-page/PostFormWarper";
-import PostItem from "@/components/posts-page/PostItem";
 import { getMe } from "@/lib/auth/getMe";
-import { getPosts } from "@/lib/services/post.service";
+import Link from "next/link";
 
 export default async function Home() {
-  const [posts, user] = await Promise.all([getPosts(), getMe()]);
+  const user = await getMe();
 
   return (
-    <main className="min-h-screen flex flex-col items-center px-4 py-10 gap-6">
-      <div className="w-full max-w-lg">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <h1 className="text-3xl font-black text-white tracking-tight">
-              Postly
-            </h1>
-            <span
-              className="px-2 py-0.5 rounded-full bg-blue-600/20 border border-blue-500/30
-      text-blue-400 text-xs font-medium"
-            >
-              Beta
-            </span>
-          </div>
-          <p className="text-zinc-500 text-sm">
-            Share what&apos;s on your mind with the world
-          </p>
+    <main className="min-h-[80vh] flex flex-col items-center justify-center px-4 gap-8">
+      <div className="flex flex-col items-center gap-3 text-center">
+        <div
+          className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20
+        text-purple-400 text-xs font-medium mb-2"
+        >
+          Share with the world
         </div>
-
-        {/* Divider */}
-        <div className="border-t border-zinc-800 mt-5" />
+        <h1 className="text-6xl font-black text-white tracking-tight">
+          Post<span className="text-purple-500">Node</span>
+        </h1>
+        <p className="text-zinc-500 text-lg max-w-sm leading-relaxed">
+          Share what&apos;s on your mind with the world — simply and
+          beautifully.
+        </p>
       </div>
 
-      <div className="w-full max-w-lg">
-        <PostFormWarper />
-      </div>
-
-      <div className="w-full max-w-lg flex flex-col gap-3">
-        {posts.length === 0 ? (
-          <div className="rounded-2xl border border-neutral-800 p-10 text-center">
-            <p className="text-neutral-500 text-sm">
-              No posts yet. Be the first.
-            </p>
+      {user ? (
+        <Link
+          href="/feed"
+          className="px-6 py-3 bg-purple-600 hover:bg-purple-500
+          text-white text-sm font-semibold rounded-xl
+          transition duration-200 active:scale-95"
+        >
+          Go to Feed →
+        </Link>
+      ) : (
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex gap-3">
+            <Link
+              href="/login"
+              className="px-6 py-3 rounded-xl border border-zinc-700 text-zinc-300
+              hover:border-zinc-500 hover:text-white text-sm font-medium
+              transition duration-200"
+            >
+              Login
+            </Link>
+            <Link
+              href="/register"
+              className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500
+              text-white text-sm font-semibold
+              transition duration-200 active:scale-95"
+            >
+              Register →
+            </Link>
           </div>
-        ) : (
-          posts.map((post) => (
-            <PostItem
-              post={post}
-              key={post.id}
-              currentUserId={user?._id.toString()}
-              isAuth={!!user}
-            />
-          ))
-        )}
-      </div>
+
+          <Link
+            href="/feed"
+            className="text-sm font-medium text-zinc-500 hover:text-zinc-300 
+            transition duration-200"
+          >
+            Or browse as a guest
+          </Link>
+        </div>
+      )}
     </main>
   );
 }
