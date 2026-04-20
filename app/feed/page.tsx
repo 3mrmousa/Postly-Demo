@@ -26,7 +26,6 @@ export default async function Feed() {
           </p>
         </div>
 
-        {/* Divider */}
         <div className="border-t border-zinc-800 mt-5" />
       </div>
 

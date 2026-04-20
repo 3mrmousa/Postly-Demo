@@ -32,11 +32,11 @@ async function UserProfile({
     <div className="min-h-screen text-zinc-100 pb-20">
       <div
         className="w-full h-48 bg-linear-to-r from-purple-950 via-purple-900 to-indigo-950
-       overflow-hidden"
+       overflow-hidden -z-100"
       >
         <div
-          className="absolute -top-10 left-1/2 -translate-x-1/2 w-96 h-32
-        bg-purple-500/30 rounded-full blur-3xl"
+          className="absolute -top-10 left-1/2 -translate-x-1/2 w-full h-32
+        bg-purple-500/30 rounded-full blur-3xl -z-100"
         />
       </div>
 
